@@ -3,7 +3,7 @@ const path = require('path');
 const config = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'public'),
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
   },
   module: {
@@ -25,7 +25,7 @@ const config = {
     ]
   },
   devServer: {
-    contentBase: './public',
+    contentBase: path.join(__dirname, 'public'),
     port: 3000
   }
 };

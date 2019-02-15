@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server"
+    "build": "webpack",
+    "start": "yarn build && webpack-dev-server"
   },
   "dependencies": {
     "path": "^0.12.7",
