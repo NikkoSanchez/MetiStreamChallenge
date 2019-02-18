@@ -203,7 +203,7 @@ export default class Search extends Component {
                 }}
               >
                 {results.map((data, i) => (
-                  <Results key={i} metaData={data} />
+                  <Results key={i} metaData={data} value={value} />
                 ))}
               </div>
             </Fragment>

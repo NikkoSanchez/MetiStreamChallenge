@@ -1,8 +1,22 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from '../styles/Results';
 import { MetaData } from '../types/Results';
 
-export default class Results extends PureComponent {
+export default class Results extends Component {
+  handleHighlight = () => {
+    const { metaData, value } = this.props;
+    let { name } = metaData;
+    // split the name into an array with each element wrapped in a <span>element</span>
+    const jsxArr = name
+      .split(new RegExp(`(${value})`, 'i',)) /* eslint-disable-line */
+      .map((val, i) => <span key={i}>{val}</span>);
+    const highlightArr = jsxArr.map((el, i) => {
+      return i%2 === 0 ? el : <span css={{ backgroundColor: 'rgb(112,135,234)' }}>{el}</span>;
+    });
+
+    return highlightArr;
+  };
   render() {
     const { metaData } = this.props;
     return (
@@ -15,9 +29,9 @@ export default class Results extends PureComponent {
               </span>
             </div>
           </div>
-          <span css={[styles.itemInfo, { fontSize: '20px' }]}>
-            {metaData.name}
-          </span>
+          <div css={[styles.itemInfo, { fontSize: '20px' }]}>
+            <span>{this.handleHighlight()}</span>
+          </div>
         </div>
         <div css={{ backgroundColor: 'rgb(54,56,80)', paddingTop: '20px' }}>
           <div
@@ -45,5 +59,6 @@ export default class Results extends PureComponent {
 }
 
 Results.propTypes = {
-  metaData: MetaData.isRequired
+  metaData: MetaData.isRequired,
+  value: PropTypes.string
 };
